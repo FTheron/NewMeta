@@ -54,8 +54,16 @@
             this.lblCurrentPath = new System.Windows.Forms.Label();
             this.lblCurrentFolder = new System.Windows.Forms.Label();
             this.lblCurrentFolderPath = new System.Windows.Forms.Label();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.miReset = new System.Windows.Forms.ToolStripMenuItem();
+            this.miExit = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.miAbout = new System.Windows.Forms.ToolStripMenuItem();
+            this.miRenameAll = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.NumericUpDown)).BeginInit();
             this.PanelMain.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblCurrentName
@@ -81,7 +89,7 @@
             this.NewName.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.NewName.Location = new System.Drawing.Point(6, 53);
             this.NewName.Name = "NewName";
-            this.NewName.Size = new System.Drawing.Size(437, 15);
+            this.NewName.Size = new System.Drawing.Size(456, 15);
             this.NewName.TabIndex = 3;
             // 
             // Save
@@ -115,7 +123,7 @@
             // lblDone
             // 
             this.lblDone.AutoSize = true;
-            this.lblDone.Location = new System.Drawing.Point(367, 9);
+            this.lblDone.Location = new System.Drawing.Point(335, 30);
             this.lblDone.Name = "lblDone";
             this.lblDone.Size = new System.Drawing.Size(46, 17);
             this.lblDone.TabIndex = 7;
@@ -143,19 +151,19 @@
             // 
             // NumericUpDown
             // 
-            this.NumericUpDown.Location = new System.Drawing.Point(419, 7);
+            this.NumericUpDown.Location = new System.Drawing.Point(387, 28);
             this.NumericUpDown.Maximum = new decimal(new int[] {
-            999,
+            999999,
             0,
             0,
             0});
             this.NumericUpDown.Name = "NumericUpDown";
-            this.NumericUpDown.Size = new System.Drawing.Size(43, 22);
+            this.NumericUpDown.Size = new System.Drawing.Size(75, 22);
             this.NumericUpDown.TabIndex = 17;
             // 
             // btnSelectPath
             // 
-            this.btnSelectPath.Location = new System.Drawing.Point(399, 14);
+            this.btnSelectPath.Location = new System.Drawing.Point(399, 33);
             this.btnSelectPath.Name = "btnSelectPath";
             this.btnSelectPath.Size = new System.Drawing.Size(75, 23);
             this.btnSelectPath.TabIndex = 18;
@@ -184,16 +192,16 @@
             this.PanelMain.Controls.Add(this.lblCurrentName);
             this.PanelMain.Controls.Add(this.NewName);
             this.PanelMain.Controls.Add(this.lblNewName);
-            this.PanelMain.Location = new System.Drawing.Point(12, 120);
+            this.PanelMain.Location = new System.Drawing.Point(12, 132);
             this.PanelMain.Name = "PanelMain";
-            this.PanelMain.Size = new System.Drawing.Size(465, 260);
+            this.PanelMain.Size = new System.Drawing.Size(474, 260);
             this.PanelMain.TabIndex = 19;
             this.PanelMain.Visible = false;
             // 
             // chkUpperCase
             // 
             this.chkUpperCase.AutoSize = true;
-            this.chkUpperCase.Location = new System.Drawing.Point(172, 167);
+            this.chkUpperCase.Location = new System.Drawing.Point(172, 174);
             this.chkUpperCase.Name = "chkUpperCase";
             this.chkUpperCase.Size = new System.Drawing.Size(133, 21);
             this.chkUpperCase.TabIndex = 27;
@@ -203,7 +211,7 @@
             // chkRUnderScore
             // 
             this.chkRUnderScore.AutoSize = true;
-            this.chkRUnderScore.Location = new System.Drawing.Point(6, 167);
+            this.chkRUnderScore.Location = new System.Drawing.Point(6, 174);
             this.chkRUnderScore.Name = "chkRUnderScore";
             this.chkRUnderScore.Size = new System.Drawing.Size(160, 21);
             this.chkRUnderScore.TabIndex = 26;
@@ -215,7 +223,7 @@
             this.TrackNum.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.TrackNum.Location = new System.Drawing.Point(143, 116);
             this.TrackNum.Name = "TrackNum";
-            this.TrackNum.Size = new System.Drawing.Size(50, 15);
+            this.TrackNum.Size = new System.Drawing.Size(75, 15);
             this.TrackNum.TabIndex = 25;
             this.TrackNum.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TrackNum_KeyPress);
             // 
@@ -242,7 +250,7 @@
             this.Artist.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.Artist.Location = new System.Drawing.Point(143, 74);
             this.Artist.Name = "Artist";
-            this.Artist.Size = new System.Drawing.Size(300, 15);
+            this.Artist.Size = new System.Drawing.Size(319, 15);
             this.Artist.TabIndex = 22;
             // 
             // lblArtist
@@ -259,7 +267,7 @@
             this.Album.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.Album.Location = new System.Drawing.Point(143, 95);
             this.Album.Name = "Album";
-            this.Album.Size = new System.Drawing.Size(300, 15);
+            this.Album.Size = new System.Drawing.Size(319, 15);
             this.Album.TabIndex = 20;
             // 
             // CurrentName
@@ -268,14 +276,14 @@
             this.CurrentName.Location = new System.Drawing.Point(109, 7);
             this.CurrentName.Name = "CurrentName";
             this.CurrentName.ReadOnly = true;
-            this.CurrentName.Size = new System.Drawing.Size(200, 15);
+            this.CurrentName.Size = new System.Drawing.Size(353, 15);
             this.CurrentName.TabIndex = 18;
             this.CurrentName.Text = "NameText";
             // 
             // lblFilePath
             // 
             this.lblFilePath.AutoSize = true;
-            this.lblFilePath.Location = new System.Drawing.Point(15, 17);
+            this.lblFilePath.Location = new System.Drawing.Point(18, 39);
             this.lblFilePath.Name = "lblFilePath";
             this.lblFilePath.Size = new System.Drawing.Size(126, 17);
             this.lblFilePath.TabIndex = 20;
@@ -284,7 +292,7 @@
             // lblCurrentPath
             // 
             this.lblCurrentPath.AutoSize = true;
-            this.lblCurrentPath.Location = new System.Drawing.Point(15, 34);
+            this.lblCurrentPath.Location = new System.Drawing.Point(18, 56);
             this.lblCurrentPath.Name = "lblCurrentPath";
             this.lblCurrentPath.Size = new System.Drawing.Size(122, 17);
             this.lblCurrentPath.TabIndex = 21;
@@ -293,7 +301,7 @@
             // lblCurrentFolder
             // 
             this.lblCurrentFolder.AutoSize = true;
-            this.lblCurrentFolder.Location = new System.Drawing.Point(15, 78);
+            this.lblCurrentFolder.Location = new System.Drawing.Point(18, 100);
             this.lblCurrentFolder.Name = "lblCurrentFolder";
             this.lblCurrentFolder.Size = new System.Drawing.Size(129, 17);
             this.lblCurrentFolder.TabIndex = 23;
@@ -302,18 +310,78 @@
             // lblCurrentFolderPath
             // 
             this.lblCurrentFolderPath.AutoSize = true;
-            this.lblCurrentFolderPath.Location = new System.Drawing.Point(15, 61);
+            this.lblCurrentFolderPath.Location = new System.Drawing.Point(18, 83);
             this.lblCurrentFolderPath.Name = "lblCurrentFolderPath";
             this.lblCurrentFolderPath.Size = new System.Drawing.Size(103, 17);
             this.lblCurrentFolderPath.TabIndex = 24;
             this.lblCurrentFolderPath.Text = "Current Folder:";
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem1,
+            this.aboutToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(498, 28);
+            this.menuStrip1.TabIndex = 26;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // fileToolStripMenuItem1
+            // 
+            this.fileToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.miReset,
+            this.miRenameAll,
+            this.miExit});
+            this.fileToolStripMenuItem1.Name = "fileToolStripMenuItem1";
+            this.fileToolStripMenuItem1.Size = new System.Drawing.Size(44, 24);
+            this.fileToolStripMenuItem1.Text = "File";
+            // 
+            // miReset
+            // 
+            this.miReset.Name = "miReset";
+            this.miReset.Size = new System.Drawing.Size(181, 26);
+            this.miReset.Text = "Reset";
+            this.miReset.Click += new System.EventHandler(this.miReset_Click);
+            // 
+            // miExit
+            // 
+            this.miExit.Name = "miExit";
+            this.miExit.Size = new System.Drawing.Size(181, 26);
+            this.miExit.Text = "Exit";
+            this.miExit.Click += new System.EventHandler(this.miExit_Click);
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.miAbout});
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
+            this.aboutToolStripMenuItem.Text = "Help";
+            // 
+            // miAbout
+            // 
+            this.miAbout.Name = "miAbout";
+            this.miAbout.Size = new System.Drawing.Size(125, 26);
+            this.miAbout.Text = "About";
+            this.miAbout.Click += new System.EventHandler(this.miAbout_Click);
+            // 
+            // miRenameAll
+            // 
+            this.miRenameAll.Name = "miRenameAll";
+            this.miRenameAll.Size = new System.Drawing.Size(181, 26);
+            this.miRenameAll.Text = "Rename All";
+            this.miRenameAll.Click += new System.EventHandler(this.miRenameAll_Click);
             // 
             // MainWindow
             // 
             this.AcceptButton = this.Save;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(491, 392);
+            this.ClientSize = new System.Drawing.Size(498, 404);
+            this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.lblCurrentFolderPath);
             this.Controls.Add(this.lblCurrentFolder);
             this.Controls.Add(this.lblCurrentPath);
@@ -327,6 +395,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.NumericUpDown)).EndInit();
             this.PanelMain.ResumeLayout(false);
             this.PanelMain.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -359,5 +429,12 @@
         private System.Windows.Forms.CheckBox chkRUnderScore;
         private System.Windows.Forms.Label lblCurrentFolder;
         private System.Windows.Forms.Label lblCurrentFolderPath;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem miReset;
+        private System.Windows.Forms.ToolStripMenuItem miExit;
+        private System.Windows.Forms.ToolStripMenuItem miAbout;
+        private System.Windows.Forms.ToolStripMenuItem miRenameAll;
     }
 }

@@ -24,3 +24,12 @@ C:\Users\cp322326\Documents\GitHub\File Renamer\File Renamer\obj\Debug\File Rena
 C:\Users\cp322326\Documents\GitHub\File Renamer\File Renamer\obj\Debug\File_Renamer.MainWindow.resources
 C:\Users\cp322326\Documents\GitHub\File Renamer\File Renamer\obj\Debug\File_Renamer.Properties.Resources.resources
 C:\Users\cp322326\Documents\GitHub\File Renamer\File Renamer\obj\Debug\File Renamer.csproj.GenerateResource.Cache
+C:\Users\cp322326\Documents\Git\NewMeta\File Renamer\bin\Debug\File Renamer.exe.config
+C:\Users\cp322326\Documents\Git\NewMeta\File Renamer\obj\Debug\File Renamer.exe
+C:\Users\cp322326\Documents\Git\NewMeta\File Renamer\obj\Debug\File Renamer.pdb
+C:\Users\cp322326\Documents\Git\NewMeta\File Renamer\bin\Debug\File Renamer.exe
+C:\Users\cp322326\Documents\Git\NewMeta\File Renamer\bin\Debug\File Renamer.pdb
+C:\Users\cp322326\Documents\Git\NewMeta\File Renamer\obj\Debug\File Renamer.csprojResolveAssemblyReference.cache
+C:\Users\cp322326\Documents\Git\NewMeta\File Renamer\obj\Debug\File_Renamer.MainWindow.resources
+C:\Users\cp322326\Documents\Git\NewMeta\File Renamer\obj\Debug\File_Renamer.Properties.Resources.resources
+C:\Users\cp322326\Documents\Git\NewMeta\File Renamer\obj\Debug\File Renamer.csproj.GenerateResource.Cache

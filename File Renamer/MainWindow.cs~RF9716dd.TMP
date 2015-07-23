@@ -11,6 +11,12 @@ using File = TagLib.File;
 
 namespace File_Renamer
 {
+    // TODO: Add menu bar
+    /* Include:
+     * Exit 
+     * About
+     */
+
     public partial class MainWindow : Form
     {
         private int _counter;
@@ -36,122 +42,11 @@ namespace File_Renamer
             string location = Settings.Default["Location"].ToString();
             if (!string.IsNullOrEmpty(location))
             {
-                MoveToDir(location, false);
+                MoveToDir(location);
             }
         }
 
         private void Save_Click(object sender, EventArgs e)
-        {
-            SaveFile();
-        }
-
-        private void Delete_Click(object sender, EventArgs e)
-        {
-            System.IO.File.Delete(_path);
-            _namesList.RemoveAt(_counter);
-            _counter++;
-            NextFile();
-        }
-
-        private void Back_Click(object sender, EventArgs e)
-        {
-            _newTitle = NewName.Text;
-            _counter--;
-            if (_counter < 0) _counter = 0;
-            if (_counter > _namesList.Count()) _counter = _namesList.Count();
-            NextFile();
-        }
-
-        private void NumericUpDown_TextChanged(object sender, EventArgs e)
-        {
-            int result;
-            if (int.TryParse(NumericUpDown.Text, out result))
-            {
-                _counter = result;
-                NextFile();
-            }
-        }
-
-        private void btnSelectPath_Click(object sender, EventArgs e)
-        {
-            FolderBrowserDialog fbd = new FolderBrowserDialog { SelectedPath = Settings.Default.Location };
-            DialogResult result = fbd.ShowDialog();
-
-            if (result == DialogResult.OK)
-            {
-                _filePath = fbd.SelectedPath;
-                Settings.Default["Location"] = _filePath;
-                Settings.Default.Save();
-                MoveToDir(_filePath, false);
-            }
-        }
-
-        private void TrackNum_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void miReset_Click(object sender, EventArgs e)
-        {
-            MoveToDir(lblCurrentPath.Text, true);
-        }
-
-        private void miRenameAll_Click(object sender, EventArgs e)
-        {
-            for (int i = 0; i < _totalFiles; i++)
-            {
-                NextFile();
-                SaveFile();
-            }
-        }
-
-        private void miExit_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
-        private void miAbout_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Developer: Francois Theron ftheron@outlook.com\nThis is a application that can mass rename music files.\nVersion 1.0", "About"
-                , MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-
-        private void MoveToDir(string location, bool reset)
-        {
-            if (!reset)
-            {
-                _counter = 0;
-            } 
-
-            // Valid Extensions that the program can handle
-            List<string> validExtentions = new List<string> { ".mp3", ".m4a", ".mp4" };
-            _namesList = new List<string>();
-            _directory = new DirectoryInfo(location);
-            _infos = _directory.GetFiles("*", SearchOption.AllDirectories);
-            foreach (FileInfo item in _infos)
-            {
-                if (!item.Name.Contains(".")) continue;
-                string ext = item.Name.Substring(item.Name.LastIndexOf('.'));
-                if (validExtentions.Contains(ext, StringComparer.OrdinalIgnoreCase))
-                {
-                    _namesList.Add(item.DirectoryName + "\\" + item.Name);
-                }
-            }
-            _totalFiles = _namesList.Count();
-
-            lblCurrentPath.Text = location;
-            if (PanelMain.Visible == false)
-            {
-                PanelMain.Visible = true;
-            }
-
-            NextFile();
-        }
-
-        public void SaveFile()
         {
             try
             {
@@ -162,7 +57,7 @@ namespace File_Renamer
                 }
                 string artist = Artist.Text;
                 string album = Album.Text;
-
+                // string album = Album.Text;
                 uint track = uint.Parse(TrackNum.Text);
                 // Remove the trailing extension
                 if (_newTitle.IndexOf('.') > 1)
@@ -172,45 +67,30 @@ namespace File_Renamer
                 else
                 {
                     // Title
-                    if (_tagFile.Tag.Title == null || !_tagFile.Tag.Title.Equals(_newTitle, StringComparison.InvariantCultureIgnoreCase))
+                    if (_tagFile.Tag.Title == null || !_tagFile.Tag.Title.Equals(_newTitle))
                     {
                         _tagFile.Tag.Title = _newTitle;
                     }
                 }
                 // Artist
-                if (_tagFile.Tag.FirstPerformer == null || !_tagFile.Tag.FirstPerformer.Equals(artist, StringComparison.InvariantCultureIgnoreCase))
+                if (!_tagFile.Tag.FirstPerformer.Equals(artist))
                 {
                     _tagFile.Tag.Performers = null; //clearing out performers
                     _tagFile.Tag.Performers = new[] { artist };
                 }
                 // Album
-                if (_tagFile.Tag.Album == null || !_tagFile.Tag.Album.Equals(album, StringComparison.InvariantCultureIgnoreCase))
-                {
-                    _tagFile.Tag.Album = album;
-                }
                 // Track
                 if (_tagFile.Tag.Track != track && track != 0)
                 {
                     _tagFile.Tag.Track = track;
                 }
 
-                // Remove unwanted characters from file name
-                _newTitle = _newTitle.Replace("<", "");
-                _newTitle = _newTitle.Replace(">", "");
-                _newTitle = _newTitle.Replace(":", "");
-                _newTitle = _newTitle.Replace("\"", "");
-                _newTitle = _newTitle.Replace("/", " ");
-                _newTitle = _newTitle.Replace("\\", " ");
-                _newTitle = _newTitle.Replace("|", " ");
-                _newTitle = _newTitle.Replace("?", "");
-                _newTitle = _newTitle.Replace("*", "");
-
                 _tagFile.Save();
                 _newTitle += _ext;
                 System.IO.File.Move(_path, _directory + _newTitle);
                 _namesList[_counter] = _directory + _newTitle;
                 _counter++;
-                NextFile();
+                GetNewFile();
             }
             catch (Exception ex)
             {
@@ -218,7 +98,7 @@ namespace File_Renamer
             }
         }
 
-        public void NextFile()
+        public void GetNewFile()
         {
             try
             {
@@ -245,7 +125,7 @@ namespace File_Renamer
                     _tagFile = File.Create(_path);
                     string artist = _tagFile.Tag.FirstPerformer;
                     string album = _tagFile.Tag.Album;
-                    int track = (int)_tagFile.Tag.Track;
+                    int track = (int) _tagFile.Tag.Track;
                     if (artist == null) artist = "No Artist";
                     if (album == null) album = "No Album";
                     Artist.Text = artist;
@@ -281,12 +161,88 @@ namespace File_Renamer
                 MessageBox.Show(@"The files meta data is corrupted,\nSkipping to new file.", @"Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 _counter++;
-                NextFile();
+                GetNewFile();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void Delete_Click(object sender, EventArgs e)
+        {
+            System.IO.File.Delete(_path);
+            _namesList.RemoveAt(_counter);
+            _counter++;
+            GetNewFile();
+        }
+
+        private void Back_Click(object sender, EventArgs e)
+        {
+            _newTitle = NewName.Text;
+            _counter--;
+            if (_counter < 0) _counter = 0;
+            if (_counter > _namesList.Count()) _counter = _namesList.Count();
+            GetNewFile();
+        }
+
+        private void NumericUpDown_TextChanged(object sender, EventArgs e)
+        {
+            int result;
+            if (int.TryParse(NumericUpDown.Text, out result))
+            {
+                _counter = result;
+                GetNewFile();
+            }
+        }
+
+        private void btnSelectPath_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog fbd = new FolderBrowserDialog {SelectedPath = Settings.Default.Location};
+            DialogResult result = fbd.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                _filePath = fbd.SelectedPath;
+                Settings.Default["Location"] = _filePath;
+                Settings.Default.Save();
+                MoveToDir(_filePath);
+            }
+        }
+
+        private void TrackNum_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void MoveToDir(string location)
+        {
+            // Valid Extensions that the program can handle
+            List<string> validExtentions = new List<string> {".mp3", ".m4a", ".mp4"};
+            _namesList = new List<string>();
+            _counter = 0;
+            _directory = new DirectoryInfo(location);
+            _infos = _directory.GetFiles("*", SearchOption.AllDirectories);
+            foreach (FileInfo item in _infos)
+            {
+                string ext = item.Name.Substring(item.Name.LastIndexOf('.'));
+                if (validExtentions.Contains(ext, StringComparer.OrdinalIgnoreCase))
+                {
+                    _namesList.Add(item.DirectoryName + "\\" + item.Name);
+                }
+            }
+            _totalFiles = _namesList.Count();
+
+            lblCurrentPath.Text = location;
+            if (PanelMain.Visible == false)
+            {
+                PanelMain.Visible = true;
+            }
+
+            GetNewFile();
         }
     }
 }
